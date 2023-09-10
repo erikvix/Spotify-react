@@ -1,0 +1,15 @@
+.avatar {
+  border-radius: 50%;
+}
+span {
+  color: chartreuse;
+}
+
+.track-grid {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+}
+.albuns {
+  width: 15rem;
+  height: 15rem;
+}
