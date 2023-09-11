@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap');
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Raleway', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -12,6 +14,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+span {
+  color: #DD1155;
+  font-weight: 700;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 a {
@@ -34,6 +46,13 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-weight: 500;
+}
+h3{
+  color: #f9fafb;
+}
+h4{
+  color: #d1d5db;
 }
 
 button {
@@ -43,12 +62,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #DD1155;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: ease all 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #DD1155;
+  background-color: #030712;
+  color: #DD1155;
 }
 button:focus,
 button:focus-visible {
@@ -58,12 +79,17 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #f9f9f9;
   }
   a:hover {
     color: #747bff;
   }
   button {
+    color: #f9f9f9;
+    background-color: #DD1155;
+  }
+  button:hover{
+    color: #DD1155;
     background-color: #f9f9f9;
   }
 }

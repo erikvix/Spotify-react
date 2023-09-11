@@ -57,7 +57,7 @@ const App = () => {
         {
             user.display_name &&
             <div className='profile'>
-                <h1>Hello <span>
+                <h1>Hello, <span>
                 {user.display_name}
                 </span></h1>
                 <img className='avatar' src={user.images[1].url}/>
@@ -66,16 +66,29 @@ const App = () => {
         {
             track.items &&
             <div className='tracks'>
-                <h2>Top tracks</h2>
-                <button onClick={() => handleMonth()} >1 Month</button>
+                <h1 className='center'>Top Tracks</h1>
+                <div className='tracks-options'>
+                    <div className='track-row'>
+                    <button>Top Tracks</button>
+                    <button>Top Artists</button>
+                    <button>Top Genres</button>
+                    </div>
+                    <div className='track-row'>
+                <button onClick={() => getData(track_endpoint + "?time_range=short_term", setTrack)} >Most Recent</button>
+                <button onClick={() => getData(track_endpoint, setTrack)} >6 months</button>
+                <button onClick={() => getData(track_endpoint + "?time_range=long_term", setTrack)} >All time</button>
+                    </div>
+                </div>
                 <div className='track-grid'>
                     {
                         track.items.map((track, index) =>{
                             return(
-                                <div key={index}>
+                                <div className='track-box' key={index}>
                                     <img className='albuns' src={track.album.images[0].url}/>
-                                    <h3>{track.name}</h3>
+                                    <div className='track-box-text'>
+                                    <h3 className='center'>{track.name}</h3>
                                     <h3>{track.artists[0].name}</h3>
+                                    </div>
                                 </div>
                             )
                         })
