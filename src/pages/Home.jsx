@@ -10,7 +10,7 @@ const App = () => {
 
     var track_endpoint = "https://api.spotify.com/v1/me/top/tracks";
     var track_endpointtest = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term";
-    const artist_endpoint = "https://api.spotify.com/v1/me/top/artist";
+    const artist_endpoint = "https://api.spotify.com/v1/me/top/artists";
     const user_endpoint = "https://api.spotify.com/v1/me";
 
 
@@ -30,9 +30,13 @@ const App = () => {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         }).then(response =>{
             setFunction(response.data)
-            console.log(response.data)
+            if(response.data.display_name){
+                console.log(response.data.display_name)
+                console.log(response.data.email)
+            }
+            // console.log(response.data)
         }).catch(error =>{
-            console.log(error);
+            // console.log(error);
         })
     }
 
