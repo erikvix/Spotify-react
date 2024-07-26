@@ -1,13 +1,11 @@
 import React from "react";
-import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 
 function App() {
-  // console.log(CLIENT_ID);
   return (
-    <div className="App">
+    <div className="max-w-screen-xl mx-auto p-2">
       <Router>
         <Routes>
           <Route path="/" element={<Login />}></Route>

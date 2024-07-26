@@ -1,35 +1,22 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./Home.css";
+import SpotifyUser from "../components/SpotifyUser";
+import { storeToken } from "../api/storeToken";
+import api from "../api/index";
 
 const App = () => {
-  const [token, setToken] = useState();
   const [artist, setArtist] = useState({});
   const [user, setUser] = useState({});
   const [track, setTrack] = useState({});
+  const token = localStorage.getItem("access_token");
 
-  var track_endpoint = "https://api.spotify.com/v1/me/top/tracks";
-  var track_endpointtest =
-    "https://api.spotify.com/v1/me/top/tracks?time_range=short_term";
-  const artist_endpoint = "https://api.spotify.com/v1/me/top/artists";
-  const user_endpoint = "https://api.spotify.com/v1/me";
-
-  const getParams = (hash) => {
-    const hashContent = hash.substring(1);
-    const paramsSplit = hashContent.split("&");
-    let params = {};
-    paramsSplit.forEach((param) => {
-      const values = param.split("=");
-      params[values[0]] = values[1];
-    });
-    return params;
-  };
+  var track_endpoint = "me/top/tracks";
+  var track_endpointtest = "/top/tracks?time_range=short_term";
+  const artist_endpoint = "/me/top/artists";
+  const user_endpoint = "/me";
 
   async function getData(endpoint, setFunction) {
-    await axios
-      .get(endpoint, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
+    await api
+      .get(endpoint)
       .then((response) => {
         setFunction(response.data);
         // console.log(response.data)
@@ -40,38 +27,26 @@ const App = () => {
   }
 
   useEffect(() => {
-    const hash = window.location.hash;
-    if (hash) {
-      var tokens = getParams(hash);
-      localStorage.setItem("token", tokens.access_token);
-      setToken(tokens.access_token);
-      window.history.pushState({}, null, "/home");
-    }
-    getData(track_endpoint, setTrack);
+    storeToken();
+    // getData(track_endpoint, setTrack);
     getData(user_endpoint, setUser);
-    getData(artist_endpoint, setArtist);
+    // getData(artist_endpoint, setArtist);
   }, []);
 
   return (
-    <div className="App">
-      {user.display_name && (
-        <div className="profile">
-          <h1>
-            Hello, <span>{user.display_name}</span>
-          </h1>
-          <img className="avatar" src={user.images[1].url} />
-        </div>
-      )}
+    <div className="mt-10">
+      <SpotifyUser />
+
       {track.items && (
         <div className="tracks">
-          <h1 className="center">Top Tracks</h1>
-          <div className="tracks-options">
-            <div className="track-row">
+          <h1 className="center text-center">Top Tracks</h1>
+          <div className="tracks-options flex flex-col items-center justify-center gap-4 mb-20 mt-8">
+            <div className="track-row flex items-center justify-center gap-4">
               <button>Top Tracks</button>
               <button>Top Artists</button>
               <button>Top Genres</button>
             </div>
-            <div className="track-row">
+            <div className="track-row flex items-center justify-center gap-4">
               <button
                 onClick={() =>
                   getData(track_endpoint + "?time_range=short_term", setTrack)
@@ -91,13 +66,19 @@ const App = () => {
               </button>
             </div>
           </div>
-          <div className="track-grid">
+          <div className="track-grid grid grid-cols-5 gap-4">
             {track.items.map((track, index) => {
               return (
-                <div className="track-box" key={index}>
-                  <img className="albuns" src={track.album.images[0].url} />
-                  <div className="track-box-text">
-                    <h3 className="center">{track.name}</h3>
+                <div
+                  className="track-box flex flex-col items-center gap-4 mb-8"
+                  key={index}
+                >
+                  <img
+                    className="albuns w-60 h-60"
+                    src={track.album.images[0].url}
+                  />
+                  <div className="track-box-text flex flex-col items-center">
+                    <h3 className="center text-center">{track.name}</h3>
                     <h3>{track.artists[0].name}</h3>
                   </div>
                 </div>
