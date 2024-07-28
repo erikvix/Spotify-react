@@ -4,21 +4,10 @@ export const AUTH_ENDPOINT = "http://localhost:5173/callback";
 export const URL_AFTER_LOGIN = "https://chartfy.netlify.app/home";
 export const SPACE_DELIMITER = "%20";
 export const SCOPES = [
-    "user-read-private",
-    "user-read-email",
-    "user-top-read",
-    "user-read-recently-played",
-    "user-read-playback-position",
+  "user-read-private",
+  "user-read-email",
+  "user-top-read",
+  "user-read-recently-played",
+  "user-read-playback-position",
 ];
 export const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER);
-
-
-
-
-
-
-
-
-
-
-// module.exports={CLIENT_ID, CLIENT_SECRET, AUTH_ENDPOINT, URL_AFTER_LOGIN, SCOPES_URL_PARAM};
