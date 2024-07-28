@@ -4,11 +4,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const TrackItem = ({ track }) => (
   <div className="flex flex-col items-center gap-4 mb-8">
-    <img
-      className="w-60 h-60 object-cover"
-      src={track.album.images[0].url}
-      alt={track.name}
-    />
+    <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+      <img
+        className="w-60 h-60 object-cover"
+        src={track.album.images[0].url}
+        alt={track.name}
+      />
+    </a>
     <div className="text-center">
       <h3 className="text-lg font-semibold">{track.name}</h3>
       <h3 className="text-sm text-slate-500">{track.artists[0].name}</h3>
