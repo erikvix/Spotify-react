@@ -4,11 +4,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const ArtistItem = ({ artist }) => (
   <div className="flex flex-col items-center gap-4 mb-8">
-    <img
-      className="w-60 h-60 object-cover"
-      src={artist.images[0].url}
-      alt={artist.name}
-    />
+    <a href={artist.external_urls.spotify} target="_blank" rel="noreferrer">
+      <img
+        className="w-60 h-60 object-cover"
+        src={artist.images[0].url}
+        alt={artist.name}
+      />
+    </a>
     <div className="text-center">
       <h3 className="text-lg font-semibold">{artist.name}</h3>
       <h3 className="text-sm text-gray-500">{artist.genres.join(", ")}</h3>
