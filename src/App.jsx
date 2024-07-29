@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { storeToken } from "./api/storeToken";
+import { Route, Router, Routes } from "react-router";
 
 function App() {
-  const token = localStorage.getItem("access_token");
   useEffect(() => {
     storeToken();
   }, []);
 
   return (
     <div className="max-w-screen-xl mx-auto p-2">
-      {token ? <Home /> : <Login />}
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
     </div>
   );
 }

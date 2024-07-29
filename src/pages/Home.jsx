@@ -19,6 +19,7 @@ const App = () => {
       error: state.error,
     }));
   useEffect(() => {
+    storeToken();
     setUser();
     setTracks();
     setArtists();
