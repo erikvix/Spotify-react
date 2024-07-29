@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import UserArtists from "@/components/UserArtists";
 
 const App = () => {
-  const { user, setUser, tracks, setTracks, setArtists, artists } =
+  const { user, setUser, tracks, setTracks, setArtists, artists, error } =
     useUserStore((state) => ({
       user: state.user,
       setUser: state.setUser,
@@ -16,6 +16,7 @@ const App = () => {
       setTracks: state.setTracks,
       artists: state.artists,
       setArtists: state.setArtists,
+      error: state.error,
     }));
   useEffect(() => {
     setUser();
@@ -25,6 +26,7 @@ const App = () => {
 
   return (
     <div className="mt-10 flex flex-col items-center gap-4">
+      {error ? <h1>{error}</h1> : <Skeleton className="h-80 w-[350px]" />}
       {user ? <SpotifyUser /> : <Skeleton className="h-80 w-[350px]" />}
       <Tabs className="flex flex-col items-center gap-4">
         <TabsList>
@@ -36,10 +38,10 @@ const App = () => {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="top_tracks">
-          <UserTracks />
+          {tracks ? <UserTracks /> : <Skeleton className="h-80 w-[350px]" />}
         </TabsContent>
         <TabsContent value="top_artists">
-          <UserArtists />
+          {artists ? <UserArtists /> : <Skeleton className="h-80 w-[350px]" />}
         </TabsContent>
       </Tabs>
       {/* {tracks ? (
