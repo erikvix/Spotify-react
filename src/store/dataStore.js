@@ -43,7 +43,9 @@ const useUserStore = create((set) => ({
     set({ error: null });
 
     try {
-      const response = await api.get(`/me/top/tracks${getTimeRange(time_range)}`);
+      const response = await api.get(
+        `/me/top/tracks${getTimeRange(time_range)}`
+      );
       set({ tracks: response.data });
     } catch (error) {
       set({ tracks: null, error: error.message });
@@ -55,7 +57,9 @@ const useUserStore = create((set) => ({
     set({ error: null });
 
     try {
-      const response = await api.get(`/me/top/artists${getTimeRange(time_range)}`);
+      const response = await api.get(
+        `/me/top/artists${getTimeRange(time_range)}`
+      );
       set({ artists: response.data });
     } catch (error) {
       set({ artists: null, error: error.message });
@@ -67,7 +71,9 @@ const useUserStore = create((set) => ({
     set({ error: null });
 
     try {
-      const response = await api.get(`/me/top/genres${getTimeRange(time_range)}`);
+      const response = await api.get(
+        `/me/top/genres${getTimeRange(time_range)}`
+      );
       set({ genres: response.data });
     } catch (error) {
       set({ genres: null, error: error.message });

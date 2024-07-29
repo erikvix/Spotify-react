@@ -25,7 +25,7 @@ const UserProfile = () => {
         </CardHeader>
         <CardContent className="flex flex-col gap-2">
           <Avatar className="h-48 w-48">
-            <AvatarImage src={user?.images[1].url} />
+            <AvatarImage src={user.images[0]?.url} />
             <AvatarFallback>User</AvatarFallback>
           </Avatar>
         </CardContent>

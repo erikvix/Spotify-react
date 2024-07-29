@@ -8,7 +8,7 @@ const ArtistItem = ({ artist }) => (
       <img
         className="w-60 h-60 object-cover"
         src={artist?.images[0].url}
-        alt={artist.name}
+        alt={artist?.name}
       />
     </a>
     <div className="text-center">
