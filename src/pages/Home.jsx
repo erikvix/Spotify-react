@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <div className="mt-10 flex flex-col items-center gap-4">
-      {error ? <h1>{error}</h1> : <Skeleton className="h-80 w-[350px]" />}
+      {error && <h1>{error}</h1>}
       {user ? <SpotifyUser /> : <Skeleton className="h-80 w-[350px]" />}
       <Tabs className="flex flex-col items-center gap-4">
         <TabsList>
