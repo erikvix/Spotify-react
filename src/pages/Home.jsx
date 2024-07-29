@@ -18,7 +18,6 @@ const App = () => {
       setArtists: state.setArtists,
     }));
   useEffect(() => {
-    storeToken();
     setUser();
     setTracks();
     setArtists();
