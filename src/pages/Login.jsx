@@ -1,15 +1,14 @@
 import React from "react";
-import {
-  AUTH_ENDPOINT,
-  CLIENT_ID,
-  CLIENT_SECRET,
-  SCOPES_URL_PARAM,
-} from "../auth/index";
 import { Button } from "@/components/ui/button";
+import { scopesUrlParams } from "@/lib/authScopes";
 
 const Login = () => {
   const handleLogin = () => {
-    window.location = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&redirect_uri=${AUTH_ENDPOINT}&scope=${SCOPES_URL_PARAM}&response_type=token`;
+    window.location = `https://accounts.spotify.com/authorize?client_id=${
+      import.meta.env.VITE_CLIENT_ID
+    }&client_secret=${import.meta.env.VITE_CLIENT_SECRET}&redirect_uri=${
+      import.meta.env.VITE_AUTH_ENDPOINT
+    }&scope=${scopesUrlParams}&response_type=token`;
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
