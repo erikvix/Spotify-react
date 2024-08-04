@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+
+# Ignore specific files
 .env
 /src/auth/index.jsx
 
@@ -24,4 +26,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
