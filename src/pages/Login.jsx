@@ -1,10 +1,15 @@
 import React from "react";
-import { SCOPES_URL_PARAM } from "../auth/index";
+import {
+  AUTH_ENDPOINT,
+  CLIENT_ID,
+  CLIENT_SECRET,
+  SCOPES_URL_PARAM,
+} from "../auth/index";
 import { Button } from "@/components/ui/button";
 
 const Login = () => {
   const handleLogin = () => {
-    window.location = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&scope=${SCOPES_URL_PARAM}&response_type=token`;
+    window.location = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&redirect_uri=${AUTH_ENDPOINT}&scope=${SCOPES_URL_PARAM}&response_type=token`;
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
