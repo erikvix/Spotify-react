@@ -4,10 +4,7 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  plugins: [react(), sentryVitePlugin({
-    org: "jusustudio",
-    project: "semaninha"
-  })],
+  plugins: [react()],
 
   resolve: {
     alias: {
@@ -15,7 +12,7 @@ export default defineConfig({
     },
   },
 
-  build: {
-    sourcemap: true
-  }
+  // build: {
+  //   sourcemap: true
+  // }
 });
