@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const Login = () => {
   const handleLogin = () => {
-    window.location = `https://accounts.spotify.com/authorize?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&redirect_uri=${process.env.REDIRECT_URI}&scope=${SCOPES_URL_PARAM}&response_type=token`;
+    window.location = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&scope=${SCOPES_URL_PARAM}&response_type=token`;
   };
   return (
     <div className="flex justify-center items-center min-h-screen">

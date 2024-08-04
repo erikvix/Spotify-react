@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .env
+/src/auth/index.jsx
 
 # Editor directories and files
 .vscode/*
