@@ -3,7 +3,6 @@ export const storeToken = () => {
   const token = params.get("access_token");
   if (token) {
     localStorage.setItem("access_token", token);
-    console.log(token);
   }
 };
 

@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { scopesUrlParams } from "@/lib/authScopes";
 
 const Login = () => {
-  console.log(import.meta.env.VITE_CLIENT_SECRET);
   const handleLogin = () => {
     window.location = `https://accounts.spotify.com/authorize?client_id=${
       import.meta.env.VITE_CLIENT_ID

@@ -44,7 +44,6 @@ export default function UserArtists() {
 
   useEffect(() => {
     setArtists();
-    console.log(artists);
   }, [setArtists]);
 
   return (
