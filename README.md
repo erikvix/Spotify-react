@@ -37,7 +37,8 @@ npm install
 npm run dev
 ```
 After starting the server, open your browser and go to http://localhost:5173.
-### Authentication
+
+### ⚠️ Authentication
 
 - The application uses OAuth 2.0 for authentication with the Spotify API. After login, the user's access token is stored in the global state managed by Zustand.
 
