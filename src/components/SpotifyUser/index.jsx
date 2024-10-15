@@ -16,7 +16,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="border flex flex-col items-center justify-center gap-4 mb-20 mt-8">
+    <div className="flex flex-col items-center justify-center gap-4 mb-20 mt-8">
       <Card className="w-80 h-auto gap-2 p-2 flex flex-col items-center justify-center">
         <CardHeader>
           <CardTitle>
