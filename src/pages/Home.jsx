@@ -45,33 +45,6 @@ const App = () => {
           {artists ? <UserArtists /> : <Skeleton className="h-80 w-[350px]" />}
         </TabsContent>
       </Tabs>
-      {/* {tracks ? (
-        <UserTracks />
-      ) : (
-        <div className="flex items-center flex-col gap-4">
-          <div className="flex items-center flex-col gap-4">
-            <Skeleton className="w-60 h-60 " />
-            <div className="space-y-2 flex flex-col items-center">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex items-center flex-col gap-4">
-            <Skeleton className="w-60 h-60 " />
-            <div className="space-y-2 flex flex-col items-center">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex items-center flex-col gap-4">
-            <Skeleton className="w-60 h-60 " />
-            <div className="space-y-2 flex flex-col items-center">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };

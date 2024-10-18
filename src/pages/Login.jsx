@@ -13,7 +13,7 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className=" flex flex-col gap-4 items-center justify-center">
-        <h1 className="text-5xl">Login with Spotify</h1>
+        <h1 className="text-3xl sm:text-5xl">Login with Spotify</h1>
         <Button onClick={() => handleLogin()}>Login</Button>
       </div>
     </div>
