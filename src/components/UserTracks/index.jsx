@@ -48,7 +48,10 @@ export default function UserTracks() {
 
   return (
     <div className="flex flex-col items-center gap-4 mb-20">
-      <Tabs className="flex flex-col items-center gap-4">
+      <Tabs
+        defaultValue="short_term"
+        className="flex flex-col items-center gap-4"
+      >
         <TabsList>
           {tabs.map((tab, index) => (
             <TabsTrigger

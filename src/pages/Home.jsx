@@ -29,7 +29,10 @@ const App = () => {
     <div className="mt-10 flex flex-col items-center gap-4">
       {error && <h1>{error}</h1>}
       {user ? <SpotifyUser /> : <Skeleton className="h-80 w-[350px]" />}
-      <Tabs className="flex flex-col items-center gap-4">
+      <Tabs
+        defaultValue="top_tracks"
+        className="flex flex-col items-center gap-4"
+      >
         <TabsList>
           <TabsTrigger className="text-lg" value="top_tracks">
             Top Tracks
