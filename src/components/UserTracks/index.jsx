@@ -49,7 +49,7 @@ export default function UserTracks() {
   return (
     <div className="flex flex-col items-center gap-4 mb-20">
       <Tabs
-        defaultValue="short_term"
+        defaultValue="medium_term"
         className="flex flex-col items-center gap-4"
       >
         <TabsList>
