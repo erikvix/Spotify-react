@@ -1,82 +1,60 @@
-export const storeToken = () => {
-  const params = new URLSearchParams(window.location.search);
-  const token = params.get("access_token");
-  if (token) {
-    localStorage.setItem("access_token", token);
-  }
-};
-
-const getTimeRange = (time_range) => {
-  if (time_range === "short_term") {
-    return "?time_range=short_term";
-  } else if (time_range === "long_term") {
-    return "?time_range=long_term";
-  } else {
-    return "?time_range=medium_term";
-  }
-};
-
 import { create } from "zustand";
 import api from "../api";
 
-const useUserStore = create((set) => ({
+export const TIME_RANGES = [
+  { value: "short_term", title: "4 Weeks" },
+  { value: "medium_term", title: "6 Months" },
+  { value: "long_term", title: "1 Year" },
+];
+export const DEFAULT_TIME_RANGE = "medium_term";
+
+const VALID_RANGES = TIME_RANGES.map((range) => range.value);
+
+const errorMessage = (error) =>
+  error.response?.data?.error?.message || error.message;
+
+// Each time range is cached in its own slot ({ items, loading, error }),
+// so switching tabs never shows another range's data and never refetches.
+const useUserStore = create((set, get) => ({
   user: null,
-  tracks: {},
-  artists: {},
-  genres: {},
-  error: null,
+  userError: null,
+  top: { tracks: {}, artists: {} },
 
-  setUser: async () => {
-    set((state) => ({ ...state, error: null }));
-
+  fetchUser: async () => {
+    if (get().user) return;
+    set({ userError: null });
     try {
       const response = await api.get("/me");
-      set(() => ({ user: response.data }));
+      set({ user: response.data });
     } catch (error) {
-      set({ user: null, error: error.message });
-      console.error(error);
+      set({ user: null, userError: errorMessage(error) });
     }
   },
 
-  setTracks: async (time_range) => {
-    set({ error: null });
+  // type: "tracks" | "artists"
+  fetchTop: async (type, timeRange = DEFAULT_TIME_RANGE) => {
+    const range = VALID_RANGES.includes(timeRange)
+      ? timeRange
+      : DEFAULT_TIME_RANGE;
+    const current = get().top[type][range];
+    if (current?.loading || current?.items) return;
 
+    const setSlot = (slot) =>
+      set((state) => ({
+        top: {
+          ...state.top,
+          [type]: { ...state.top[type], [range]: slot },
+        },
+      }));
+
+    setSlot({ items: null, loading: true, error: null });
     try {
-      const response = await api.get(
-        `/me/top/tracks${getTimeRange(time_range)}`
-      );
-      set({ tracks: response.data });
+      const response = await api.get(`/me/top/${type}`, {
+        params: { time_range: range, limit: 20 },
+      });
+      setSlot({ items: response.data.items, loading: false, error: null });
     } catch (error) {
-      set({ tracks: null, error: error.message });
-      console.error(error);
-    }
-  },
-
-  setArtists: async (time_range) => {
-    set({ error: null });
-
-    try {
-      const response = await api.get(
-        `/me/top/artists${getTimeRange(time_range)}`
-      );
-      set({ artists: response.data });
-    } catch (error) {
-      set({ artists: null, error: error.message });
-      console.error(error);
-    }
-  },
-
-  setGenres: async (time_range) => {
-    set({ error: null });
-
-    try {
-      const response = await api.get(
-        `/me/top/genres${getTimeRange(time_range)}`
-      );
-      set({ genres: response.data });
-    } catch (error) {
-      set({ genres: null, error: error.message });
-      console.error(error);
+      setSlot({ items: null, loading: false, error: errorMessage(error) });
     }
   },
 }));

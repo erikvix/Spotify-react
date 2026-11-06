@@ -1,7 +1,2 @@
-const spaceDelimiter = "%20";
-const scopes = [
-  "user-read-email",
-  "user-top-read",
-];
-
-export const scopesUrlParams = scopes.join(spaceDelimiter);
+// Only the scopes the app actually uses.
+export const scopes = ["user-top-read"];

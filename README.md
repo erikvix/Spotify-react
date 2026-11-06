@@ -14,7 +14,7 @@ You can access the project at this link: [Semaninha](https://semaninha.netlify.a
 
 ## Features
 
-- **Top Artists Visualization**: Allows users to view their top artists over three different periods:
+- **Top Tracks and Top Artists**: View your most played tracks and artists over three periods:
   - Last 4 Weeks
   - Last 6 Months
   - Last Year
@@ -36,20 +36,16 @@ npm install
 ```sh
 npm run dev
 ```
-After starting the server, open your browser and go to http://localhost:5173.
+After starting the server, open your browser and go to https://127.0.0.1:5173 (the dev server uses a self-signed certificate, so accept the browser warning).
 
 ### ⚠️ Authentication
 
-- The application uses OAuth 2.0 for authentication with the Spotify API. After login, the user's access token is stored in the global state managed by Zustand.
+The app uses the OAuth 2.0 **Authorization Code flow with PKCE**, which runs entirely in the browser and needs **no client secret**. Tokens are stored in `localStorage` and refreshed automatically when they expire.
 
-- **To use the application correctly**, you will need to modify some settings in the login component.
+1. Create an app in the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard).
+2. Add a Redirect URI, for example `https://127.0.0.1:5173/home` for local development (Spotify does not accept `localhost`; use `127.0.0.1`) and `https://your-site.netlify.app/home` in production.
+3. Copy `.env.example` to `.env` and fill in `VITE_CLIENT_ID` and `VITE_REDIRECT_URI`.
 
-  In the component located at `/src/pages/Login.jsx`, update the `handleLogin` function as follows:
+> Never put the client secret in a `VITE_*` variable: everything with that prefix is shipped in the public JavaScript bundle.
 
-  ```javascript
-  const handleLogin = () => {
-    window.location = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&redirect_uri=${AUTH_ENDPOINT}&scope=${SCOPES_URL_PARAM}&response_type=token`;
-  };
-  ```
-  Replace the environment variables (CLIENT_ID, CLIENT_SECRET, etc.) with your own clientId and clientSecret, which can be obtained by creating an application on the Spotify API dashboard.
-
+While your Spotify app is in development mode, only users you add in the dashboard can log in.

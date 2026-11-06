@@ -1,20 +1,31 @@
-import React from "react";
+import { useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { scopesUrlParams } from "@/lib/authScopes";
+import { isLoggedIn, redirectToSpotifyLogin } from "@/lib/auth";
 
 const Login = () => {
+  const { search } = useLocation();
+  const [error, setError] = useState(null);
+
+  // If the redirect URI points at "/", hand the code over to /home.
+  const params = new URLSearchParams(search);
+  if (params.has("code") || params.has("error")) {
+    return <Navigate to={`/home${search}`} replace />;
+  }
+  if (isLoggedIn()) {
+    return <Navigate to="/home" replace />;
+  }
+
   const handleLogin = () => {
-    window.location = `https://accounts.spotify.com/authorize?client_id=${
-      import.meta.env.VITE_CLIENT_ID
-    }&client_secret=${import.meta.env.VITE_CLIENT_SECRET}&redirect_uri=${
-      import.meta.env.VITE_AUTH_ENDPOINT
-    }&scope=${scopesUrlParams}&response_type=token`;
+    redirectToSpotifyLogin().catch((err) => setError(err.message));
   };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className=" flex flex-col gap-4 items-center justify-center">
         <h1 className="text-3xl sm:text-5xl">Login with Spotify</h1>
-        <Button onClick={() => handleLogin()}>Login</Button>
+        <Button onClick={handleLogin}>Login</Button>
+        {error && <p className="text-destructive">{error}</p>}
       </div>
     </div>
   );
